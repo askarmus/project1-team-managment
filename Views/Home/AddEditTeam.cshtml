@@ -1,0 +1,47 @@
+﻿@model  Assessment.Web.ViewModel.TeamViewModel
+@{
+    ViewBag.Title = "Project2";
+}
+<h3 class="mt-5">UNDP Assesment - Project2</h3>
+<p class="lead">By Askar Musthaffa.</p>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="card card-custom gutter-b mt-5">
+    <div class="card-header">
+        <div class="card-title d-flex justify-content-between">
+            <h3>New Team</h3>
+            <a href="/" class="btn btn-primary">Back List</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name)
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description)
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+            @Html.HiddenFor(model => model.TeamId)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="pt-5 ">
+            <h5>Team Members</h5>
+        </div>
+        @Html.Partial("TeamMemberPartial", Model)
+         
+        <div class="pb-5 ">
+            <button type="button" class="new-row btn btn-outline-dark" title="New row">Add New Member</button>
+        </div>
+
+        <p>
+            <button type="submit" id="submit" class="btn btn-primary btn-lg">Save</button>
+            <button type="reset" id="reset" class="btn btn-warning btn-lg" onclick="$(this).resetValidation()">Exit</button>
+        </p>
+    </div>
+</div>
+
+
+}

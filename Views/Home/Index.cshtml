@@ -1,0 +1,60 @@
+﻿@model  List<Assessment.Web.ViewModel.TeamViewModel>
+@{
+    ViewBag.Title = "Project2";
+}
+<h1 class="mt-5">UNDP Assesment - Project2</h1>
+<p class="lead">By Askar Musthaffa.</p>
+@using (Html.BeginForm())
+{
+    if (ViewBag.message != null)
+    {
+    <div class="alert alert-primary" role="alert">
+        @ViewBag.message
+    </div>
+    }
+
+    <div class="card card-custom gutter-b mt-5">
+        <div class="card-header">
+            <div class="card-title d-flex justify-content-between">
+                <h3>Team</h3>
+                <a href="/home/AddEditTeam/" class="btn btn-primary">ADD TEAM</a>
+            </div>
+        </div>
+        <div class="card-body">
+
+
+            <table id="skills-table" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width:160px;">Name</th>
+                        <th style="width:150px;">Description</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model.ToList())
+                    {
+                        <tr valign="top">
+
+                            <td>
+                                @item.Name
+                            </td>
+                            <td>
+                                @item.Description
+                            </td>
+
+                            <td style="width:32px; text-align:right">
+                                <a href="/home/AddEditTeam?teamid=@item.TeamId" class="btn btn-outline-primary float-right" title="Delete row">Edit Team</a>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+}

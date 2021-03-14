@@ -1,0 +1,40 @@
+﻿@model  Assessment.Web.ViewModel.TeamViewModel
+<table id="team-table" class="table table-bordered">
+    <thead>
+        <tr>
+            <th style="width:160px;">Name</th>
+            <th style="width:150px;">Gender</th>
+            <th style="width:150px;">Date of Birth</th>
+            <th style="width:150px;">Contact Number</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (var j = 0; j < Model.TeamMembers.Count; j++)
+        {
+            <tr valign="top">
+                <td>
+                    @Html.TextBoxFor(model => model.TeamMembers[j].Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TeamMembers[j].Name)
+                </td>
+                <td>
+                    @Html.MyDropDownListFor(
+                        model => model.TeamMembers[j].Gender,
+                        new SelectList(Assessment.Web.LookupModel.Gender.GetGender(), "Id", "Value", Model.TeamMembers[j].Gender),
+                        "-- Select Gender--",
+                        new { @class = "form-control" }
+                        )
+                    @Html.ValidationMessageFor(model => model.TeamMembers[j].Gender)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.TeamMembers[j].DOB, new { @class = "form-control", type = "date" })
+                    @Html.ValidationMessageFor(model => model.TeamMembers[j].DOB)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.TeamMembers[j].ContactNumber, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TeamMembers[j].ContactNumber)
+                    @Html.TextBoxFor(model => model.TeamMembers[j].TeamMemberId, new { style = "display:none" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
